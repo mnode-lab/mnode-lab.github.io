@@ -1,0 +1,58 @@
+---
+layout: default
+---
+
+<div class="post-list">
+    <div class="post-list-header">
+        <span class="line"><span class="prompt">~/mnode-lab/blog</span> > cat recent_posts.log</span>
+        <span class="line"></span>
+    </div>
+    
+    {% for post in paginator.posts %}
+    <article class="post-item {% if post.featured %}featured{% endif %}">
+        <div class="post-meta">
+            <span class="secondary-text">[{{ post.date | date: "%Y-%m-%d" }}]</span>
+            {% if post.featured %}
+            <span class="post-tag">FEATURED</span>
+            {% endif %}
+            {% for tag in post.tags limit:3 %}
+            <span class="post-tag">{{ tag }}</span>
+            {% endfor %}
+        </div>
+        
+        <h2 class="post-title">
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </h2>
+        
+        {% if post.excerpt %}
+        <div class="post-excerpt">
+            > {{ post.excerpt | strip_html | truncatewords: 50 }}
+        </div>
+        {% endif %}
+        
+        <div>
+            <a href="{{ post.url | relative_url }}" class="post-read-more">[READ MORE]</a>
+        </div>
+    </article>
+    {% endfor %}
+    
+    {% if paginator.total_pages > 1 %}
+    <nav class="pagination">
+        <span class="line"></span>
+        <span class="line">
+            Page {{ paginator.page }} of {{ paginator.total_pages }} | 
+            {% if paginator.previous_page %}
+            <a href="{{ paginator.previous_page_path | relative_url }}">[PREV]</a>
+            {% endif %}
+            {% if paginator.next_page %}
+            <a href="{{ paginator.next_page_path | relative_url }}">[NEXT]</a>
+            {% endif %}
+            {% if paginator.page < paginator.total_pages %}
+            <a href="{{ site.paginate_path | replace: ':num', paginator.total_pages | relative_url }}">[LAST]</a>
+            {% endif %}
+        </span>
+        <span class="line"></span>
+        <span class="line"><span class="prompt">~/mnode-lab/blog</span> > <span class="cursor"></span></span>
+    </nav>
+    {% endif %}
+</div>

@@ -1,0 +1,35 @@
+---
+layout: default
+---
+
+<article class="post-content">
+    <header class="post-header">
+        <span class="line"><span class="prompt">~/mnode-lab/blog</span> > cat {{ page.date | date: "%Y-%m-%d" }}-{{ page.slug }}.md</span>
+        <span class="line"></span>
+        <span class="line">---</span>
+        <span class="line">Title: <span class="highlight-text">{{ page.title }}</span></span>
+        <span class="line">Date: <span class="secondary-text">{{ page.date | date: "%Y-%m-%d %H:%M:%S %z" }}</span></span>
+        <span class="line">Author: <span class="secondary-text">{{ page.author | default: site.title }}</span></span>
+        {% if page.tags.size > 0 %}
+        <span class="line">Tags: <span class="secondary-text">[{% for tag in page.tags %}{{ tag }}{% unless forloop.last %}, {% endunless %}{% endfor %}]</span></span>
+        {% endif %}
+        <span class="line">---</span>
+    </header>
+    
+    <div class="post-body">
+        {{ content }}
+    </div>
+    
+    <nav class="post-nav">
+        <span class="line"></span>
+        <span class="line"><span class="prompt">~/mnode-lab/blog</span> > 
+            <a href="{{ '/' | relative_url }}">[← BACK TO LIST]</a>
+            {% if page.previous.url %}
+            <a href="{{ page.previous.url | relative_url }}">[← PREV POST]</a>
+            {% endif %}
+            {% if page.next.url %}
+            <a href="{{ page.next.url | relative_url }}">[NEXT POST →]</a>
+            {% endif %}
+        </span>
+    </nav>
+</article>

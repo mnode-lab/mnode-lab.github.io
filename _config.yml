@@ -1,0 +1,45 @@
+title: "Micro-Node Lab"
+description: "Replicating DeepSeek V3 limits on consumer hardware"
+url: "https://mnode-lab.github.io"
+baseurl: ""
+
+# Pagination
+paginate: 10
+paginate_path: "/page:num/"
+
+# Markdown engine
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    default_lang: bash
+
+# Plugins
+plugins:
+  - jekyll-paginate
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /blog/:year/:month/:day/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "μNode Lab"
+
+# Exclude from processing
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
